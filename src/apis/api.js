@@ -66,24 +66,22 @@ const api = {
           },
           withCredentials: true,
         })
-        if (response.status === 200 && response.data.code === 204) {
-          window.alert("해당 데이터는 존재하지 않습니다.");
-          // window.alert("종료시간이 시작시간보다 빠를 수 없습니다.");
-        }
-        else if (response.status === 404){
+        // if (response.status === 200 && response.data.code === 204) {
+        //   // window.alert("종료시간이 시작시간보다 빠를 수 없습니다.");
+        //   window.alert("해당 데이터는 존재하지 않습니다.");
+        // }
+        // else 
+        if (response.status === 404){
           window.alert("페이지가 존재하지 않습니다.");
         } else if(response.status === 422){
           window.alert("필요한 정보가 모두 입력되지 않았습니다.");
-        }
-        // } else if(response.status === 200 && response.data.code === 204 && startTime[1] > endTime[1]){
-        //   window.alert("종료시간이 시작시간보다 빠를 수 없습니다.");
-        // } else if(startTime[1] === endTime[1]){
+        } else if(startTime[1] > endTime[1]){
+          window.alert("종료시간이 시작시간보다 빠를 수 없습니다111");
+        } else if(startTime[2] > endTime[2]){
+          window.alert("종료시간이 시작시간보다 빠를 수 없습니다222");
+        } 
+        // else if(startTime[1] === endTime[1]){
         //   window.alert("종료시간이 시작시간과 같을 수 없습니다.");
-        // } else if(startTime[2] > endTime[2]){
-        //   window.alert("종료시간이 시작시간보다 빠를 수 없습니다.");
-        // } else if(startTime[2] === endTime[2]){
-        //   window.alert("종료시간이 시작시간과 같을 수 없습니다."); 
-        // }
         return response.data
       } 
       catch (error) {

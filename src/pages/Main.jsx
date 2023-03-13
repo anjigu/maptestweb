@@ -19,12 +19,10 @@ const Main = (props) => {
     api.getOrder(q).then((data,) => {
       console.log("set Data 들어있니", data.data.setData[0])
       console.log('data.data.setData[0] 뭔데',data.data.setData[0])
-      console.log('data.data 뭔데 ',data.data)
+      console.log('data.data 뭔데', data.data)
     setData(data?.data?.setData)
     setOrders(data?.data?.setOrders)
     })
-
-
   }
 
   // useEffect(()=> {

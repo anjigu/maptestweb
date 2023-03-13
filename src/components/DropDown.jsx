@@ -89,7 +89,8 @@ const DropDown = (props) => {
         <DropInner>
           {menuType === "time" && <TimeSelectorBox>
             <TimeSelectorList>
-              <TimeSelectorItem onClick={() => {
+              <TimeSelectorItem 
+              onClick={() => {
                 if (props.setStartTime) {
                   props?.setStartTime((prev) => prev.map((item, idx) => {
                     if (idx === 0) {
@@ -111,8 +112,11 @@ const DropDown = (props) => {
                 handleIsAmOrPmClick("am")
               }
 
-              } baseTarget={isAmOrPm} target={"am"}>am</TimeSelectorItem>
-              <TimeSelectorItem onClick={() => {
+              } baseTarget={isAmOrPm} target={"am"}>am
+              </TimeSelectorItem>
+
+              <TimeSelectorItem 
+              onClick={() => {
 
                 if (props.setStartTime) {
                   props?.setStartTime((prev) => prev.map((item, idx) => {
@@ -134,7 +138,10 @@ const DropDown = (props) => {
                 }
 
                 handleIsAmOrPmClick("pm")
-              }} baseTarget={isAmOrPm} target={"pm"}>pm</TimeSelectorItem>
+              }} baseTarget={isAmOrPm} target={"pm"}>
+                pm
+                </TimeSelectorItem>
+
             </TimeSelectorList>
             <TimeSelectorList>
               {new Array(12).fill(0).map((item, idx) => {
@@ -144,9 +151,10 @@ const DropDown = (props) => {
                     props?.setStartTime((prev) => prev.map((item, prevIdx) => {
                       if (prevIdx === 1) {
                         if (idx + 1 <= 9) {
-                          return `0${idx + 1}`
+                          // return `0${idx+12}`
+                          return `0${idx+1}`
                         } else {
-                          return `${idx + 1}`
+                          return `${idx+13}`
                         }
                       } else {
                         return item
@@ -157,9 +165,10 @@ const DropDown = (props) => {
                     props?.setEndTime((prev) => prev.map((item, prevIdx) => {
                       if (prevIdx === 1) {
                         if (idx + 1 <= 9) {
-                          return `0${idx + 1}`
+                          // return `0${idx+12}`
+                          return `${idx+13}`
                         } else {
-                          return `${idx + 1}`
+                          return `${idx+13}`
                         }
                       } else {
                         return item
