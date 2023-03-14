@@ -55,27 +55,27 @@ const Map = (props) => {
 
    // 지역 타입 메뉴 데이터    
    const [geoMenuData, setGeoMenuData] = useState([])
-
-
+   
 //객체에서 꺼내서 사용***
   const blueTruckLocations = props.locations?.filter(location => location.truck_num === 1234).map((x,i)=>({...x, icon: MarkerBlue[i].image}))
   const orangeTruckLocations = props.locations?.filter(location => location.truck_num === 2345).map((x,i)=>({...x, icon: MarkerOrange[i].image}))
   const redTruckLocations = props.locations?.filter(location => location.truck_num === 3456).map((x,i)=>({...x, icon: MarkerRed[i].image}))
   
-  const blueTruckLocation = props.data?.filter(data => data.truck_num === 1234).map((x,i)=>({...x, icon: MarkerBlue[i].image}))
-  const orangeTruckLocation = props.data?.filter(data => data.truck_num === 2345).map((x,i)=>({...x, icon: MarkerOrange[i].image}))
-  const redTruckLocation = props.data?.filter(data => data.truck_num === 3456).map((x,i)=>({...x, icon: MarkerRed[i].image}))
+
 
 // const [blueTruckLocations,orangeTruckLocations,redTruckLocations] = Promise.all([props.locations?.filter(location => location.truck_num === 1234).map((x,i)=>({...x, icon: MarkerBlue[i].image})),props.locations?.filter(location => location.truck_num === 2345).map((x,i)=>({...x, icon: MarkerOrange[i].image})),props.locations?.filter(location => location.truck_num === 3456).map((x,i)=>({...x, icon: MarkerRed[i].image}))]) 
+console.log('props.locations, props.orders 확인!',props.locations, props.setOrders)
+console.log('blueTruckLocations 1',blueTruckLocations)
+console.log('orangeTruckLocations 1',orangeTruckLocations)
+console.log('redTruckLocations 1',redTruckLocations)
 
-console.log('blueTruckLocations 뭔데',blueTruckLocations)
-console.log('blueTruckLocation 뭔데',blueTruckLocation)
 
 
 useEffect(()=>{
   console.log(test)
+  props.setLocations(props.setOrders)
   renderZoom(geoMenuData)
-},[test])
+},[test, props.setOrders])
 
 const renderZoom = (findGeoList)=> {
 if (test === 0) {
@@ -90,14 +90,18 @@ if (test === 0) {
 
 
 
+console.log('blueTruckLocations 2',blueTruckLocations)
+console.log('orangeTruckLocations 2',orangeTruckLocations)
+console.log('redTruckLocations 2',redTruckLocations)
   return (
     <Layout>
       <Nav 
       setList={props.setList}
+      setOrderList={props.setList}
       setLocations={props.setLocations} 
       setData={props.setData} 
-      serOrderList={props.setList}
       setTest={setTest}
+      setOrders={props.setOrders}
       test={test}
       />
 
@@ -111,6 +115,7 @@ if (test === 0) {
         margin={[50, 50, 50, 50]}
         options={''}
       >
+        
         {blueTruckLocations?.map((location) => (
           <Marker 
             key={location.truck_num}
@@ -119,8 +124,9 @@ if (test === 0) {
             lng={location.order_lng}
             icon={location.icon}
             zIndex={1}
-          />
+          /> 
         ))}
+    
         {orangeTruckLocations?.map((location) => (
           <Marker
             key={location.truck_num}
@@ -131,7 +137,8 @@ if (test === 0) {
             ZIndex={10}
           />
         ))}
-          {redTruckLocations?.map((location) => (
+
+        {redTruckLocations?.map((location) => (
           <Marker
             key={location.truck_num}
             location={location}
@@ -141,8 +148,10 @@ if (test === 0) {
             ZIndex={10}
           />
         ))}
+        
       </GoogleMapReact>
     </Layout>
+    
   );
 };
 

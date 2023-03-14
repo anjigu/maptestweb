@@ -12,14 +12,19 @@ const Main = (props) => {
   const [List, setList] = useState()
   const [q, setQ] = useState()
   const [targetGeo, setTargetGeo] = useState(0)
-  console.log(locations)
+  console.log("locations ??", locations)
 
-  const submit = () =>{
+  const submit = (data) =>{
     //aside에서 요청
-    api.getOrder(q).then((data,) => {
+    api.getOrder(q).then((data) => {
+      
       console.log("set Data 들어있니", data.data.setData[0])
       console.log('data.data.setData[0] 뭔데',data.data.setData[0])
       console.log('data.data 뭔데', data.data)
+      console.log('data.data.setOrders 확인', data.data.setOrders)
+    //마커를 지워주고
+    setLocations(null)
+    //세로운 마커를 찍어주기
     setData(data?.data?.setData)
     setOrders(data?.data?.setOrders)
     })
@@ -45,7 +50,8 @@ const Main = (props) => {
           setList={setList}
           setData={setData} 
           setLocations={setLocations}
-          setOrders={setOrders}
+          setOrders={orders}
+
           />
           <Aside 
           submit={submit}

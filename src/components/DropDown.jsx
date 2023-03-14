@@ -180,6 +180,7 @@ const DropDown = (props) => {
               })}
             </TimeSelectorList>
             <TimeSelectorList>
+              
               {new Array(60).fill(0).map((item, idx) => {
                 return <TimeSelectorItem onClick={() => {
                   if (props.setStartTime) {
@@ -223,11 +224,10 @@ const DropDown = (props) => {
           })}
 
 
-
-           {menuType === "set" && menuData2?.map((item, idx) => {
+            {menuData2 ? menuType === "set" && menuData2?.map((item) => {
             return <DropItem style={{color: item === q ? "red" : "black"}}
             onClick={() => props.setQ(item)}>{item}</DropItem>
-          })}  
+          }): null }
         
           {menuData?.length <= 0 && <div>로딩중..</div>}
 
@@ -235,6 +235,7 @@ const DropDown = (props) => {
 
 
         </DropInner>
+        
       </DropWrapper>
     </Layout >
   );

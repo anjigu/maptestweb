@@ -127,7 +127,7 @@ const Nav = (props) => {
       geoId: geoMenuData?.[props.test]?.geo_area_id
     }).then((data) => {
       console.log('data가 뭔데',data)
-      props.setList(data?.data) 
+      props.setList(data?.data.setList) //체크
       props.setData(data?.data?.firstSetData)
       props.setLocations(data?.data?.firstSetOrders)
       setIsLoading(false); 
@@ -151,6 +151,7 @@ const Nav = (props) => {
       //첫번째 오더값과 좌표
       props.setLocations(data?.data?.firstSetOrders) 
       props.setOrderList(data?.data?.setList)
+
       console.log("test 작동 여부1", props.test)
         if(response.status === 200 && response.data.code === 204) {
           window.alert("해당 데이터는 존재하지 않습니다.");
@@ -329,9 +330,10 @@ const Nav = (props) => {
         disabled={isLoading}
         >
           {isLoading ?  '결과 확인중 ...' : disabled ? '처리 중...' : '결과 확인'}
+          
           {/* {isLoading ?  '결과 확인 중'
           (
-  <Lottie
+           <Lottie
     options={{
       lottieOptions,
       animationData,
@@ -344,6 +346,8 @@ const Nav = (props) => {
           ) : (
          '결과 확인'
         )} */}
+
+
         </Button>
       <hr />
         <Button

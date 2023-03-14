@@ -17,6 +17,7 @@ const Aside = props => {
     console.log(props.data, "data")
   }, [props])
 
+  console.log("props.submit 확인",props.submit)
   return (
     <Layout> 
       <Nav>
@@ -24,13 +25,13 @@ const Aside = props => {
           q={props?.q}
           icon={true}
           menuType="set"
-          menuData2={props?.List?.setList}
+          menuData2={props?.List}
           setQ={props?.setQ}
          >
          {props?.data?.map((x)=>x.set_num)}
       </DropDown>
   
-      
+    
         <Button
           width={350}
           disabled={isLoading}
