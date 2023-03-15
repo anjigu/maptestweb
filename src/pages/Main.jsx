@@ -9,25 +9,31 @@ const Main = (props) => {
   const [orders, setOrders] = useState()
   const [data, setData] = useState()
   const [locations, setLocations] = useState()
+  const [pertruck, setPerTruck] = useState()
   const [List, setList] = useState()
   const [q, setQ] = useState()
   const [targetGeo, setTargetGeo] = useState(0)
+  const [isLoading, setIsLoading] = useState(false);
+  const [disabled, setDisabled] = useState(false);
   console.log("locations ??", locations)
 
   const submit = (data) =>{
     //aside에서 요청
     api.getOrder(q).then((data) => {
       
-      console.log("set Data 들어있니", data.data.setData[0])
-      console.log('data.data.setData[0] 뭔데',data.data.setData[0])
-      console.log('data.data 뭔데', data.data)
-      console.log('data.data.setOrders 확인', data.data.setOrders)
+      // console.log("set Data 들어있니", data.data.setData[0])
+      // console.log('data.data.setData[0] 뭔데',data.data.setData[0])
+      // console.log('data.data 뭔데', data.data)
+      // console.log('data.data.setOrders 확인', data.data.setOrders)
     //마커를 지워주고
     setLocations(null)
     //세로운 마커를 찍어주기
     setData(data?.data?.setData)
     setOrders(data?.data?.setOrders)
+    setPerTruck(data?.data?.setPerTruck)
     })
+    setIsLoading(false);
+    setDisabled(false);
   }
 
   // useEffect(()=> {
@@ -51,15 +57,18 @@ const Main = (props) => {
           setData={setData} 
           setLocations={setLocations}
           setOrders={orders}
-
+          setPerTruck={setPerTruck}
           />
           <Aside 
+         pertruck={pertruck}
+          locations={locations} 
           submit={submit}
           setQ={setQ}
           q={q}
           List={List}
           orders={orders} 
           data={data} 
+          // idx={}
           // handleDetailResultOnClick={handleDetailResultOnClick} 
           />
         </Row>

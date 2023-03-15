@@ -31,27 +31,6 @@ const api = {
     }
   },
   
-  // getSet: {
-  //   nextGeoId: 1,
-  //   async fetch(geoId, startTime, endTime) {
-  //     const start = `${startTime[0]},${startTime[1]},${startTime[2]}`
-  //     const end = `${endTime[0]},${endTime[1]},${endTime[2]}`
-  //     try {
-  //       const response = await axios.get(`/set?geoId=${this.nextGeoId}&startTime=${start}&endTime=${end}`, {
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //         withCredentials: true,
-  //       })
-  //       if (response.status === 200 && response.data.code === 204) {
-  //         window.alert("해당 데이터는 존재하지 않습니다.");
-  //       }
-  //       return response.data
-  //     } catch (error) {
-  //       return error
-  //     }
-  //   }
-  // },
 
   getSet: {
     nextGeoId: 1,

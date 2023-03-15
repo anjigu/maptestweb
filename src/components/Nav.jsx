@@ -7,6 +7,7 @@ import DropDown from './DropDown';
 import Lottie from 'react-lottie';
 import animationData from '../assets/animation.json';
 
+
 const lottieOptions = {
   loop: true,
   autoplay: true,
@@ -116,6 +117,9 @@ const Nav = (props) => {
   
   const [zoom, setZoom] = useState(20);
 
+  
+
+  
   const handleResultOnClick = async () => {
     setIsLoading(true); 
     setDisabled(true); 
@@ -127,9 +131,10 @@ const Nav = (props) => {
       geoId: geoMenuData?.[props.test]?.geo_area_id
     }).then((data) => {
       console.log('data가 뭔데',data)
-      props.setList(data?.data.setList) //체크
+      props.setList(data?.data.setList) 
       props.setData(data?.data?.firstSetData)
       props.setLocations(data?.data?.firstSetOrders)
+      props.setPerTruck(data?.data?.firstSetPerTruck)
       setIsLoading(false); 
       setDisabled(false); 
     })
@@ -147,7 +152,9 @@ const Nav = (props) => {
     .then((data,response) => {
       console.log('data가 뭔데', data)
       props.setList(data?.data) 
-      props.setData(data?.data?.firstSetData)
+      props.setData(data?.data?.firstSetData) 
+      //트럭별 평균 데이터 
+      props.setPerTruck(data?.data?.firstSetPerTruck)
       //첫번째 오더값과 좌표
       props.setLocations(data?.data?.firstSetOrders) 
       props.setOrderList(data?.data?.setList)
@@ -156,15 +163,6 @@ const Nav = (props) => {
         if(response.status === 200 && response.data.code === 204) {
           window.alert("해당 데이터는 존재하지 않습니다.");
       } 
-      // else if(startTime.start[1] > endTime.end[1]){
-      //   window.alert("종료시간이 시작시간보다 빠를 수 없습니다.");
-      // } else if(startTime.start[1] === endTime.end[1]){
-      //   window.alert("종료시간이 시작시간과 같을 수 없습니다.");
-      // } else if(startTime.start[2] > endTime.end[2]){
-      //   window.alert("종료시간이 시작시간보다 빠를 수 없습니다.");
-      // } else if(startTime.start[2] === endTime.end[2]){
-      //   window.alert("종료시간이 시작시간과 같을 수 없습니다2."); 
-      // }
         setIsLoading(false);
         setDisabled(false);
         console.log("test 작동 여부2", props.test)
@@ -184,6 +182,7 @@ const Nav = (props) => {
       props.setList(data?.data) 
       props.setData(data?.data?.firstSetData)
       props.setLocations(data?.data?.firstSetOrders)
+      props.setPerTruck(data?.data?.firstSetPerTruck)
       setIsLoading(false);
       setDisabled(false);
     })
@@ -196,7 +195,9 @@ const Nav = (props) => {
     api.getSet.fetch(props.test, startTime, endTime)
     .then((data) => {
       props.setList(data?.data) 
-      props.setData(data?.data?.firstSetData)
+      props.setData(data?.data?.firstSetData) 
+      //트럭 평균 데이터
+      props.setPertruck(data?.data?.firstSetPerTruck)
       props.setLocations(data?.data?.firstSetOrders)
       props.setOrderList(data?.data?.setList)
       setIsLoading(false);
@@ -229,6 +230,7 @@ const Nav = (props) => {
   const handleReloadClick = () => {
     window.location.reload();
   };
+
 
 
   return (
@@ -311,8 +313,8 @@ const Nav = (props) => {
         </InputBox>
         <InputBox>
           <InputButtonBox>
-            <InputButtonCheck onClick={handleCheckBtnOnClick
-            }></InputButtonCheck>
+            <InputButtonCheck 
+            onClick={handleCheckBtnOnClick}></InputButtonCheck>
           </InputButtonBox>
           {isAlgorithm && <Input
             type="number"
@@ -329,25 +331,14 @@ const Nav = (props) => {
         onClick={handleResultOnClick} 
         disabled={isLoading}
         >
-          {isLoading ?  '결과 확인중 ...' : disabled ? '처리 중...' : '결과 확인'}
-          
-          {/* {isLoading ?  '결과 확인 중'
-          (
-           <Lottie
-    options={{
-      lottieOptions,
-      animationData,
-      loop: true,
-      autoplay: true,
-    }}
-    height={50}
-    width={50}
-  />
-          ) : (
-         '결과 확인'
-        )} */}
 
+      {/* 로딩 애니메이션 추가시*/}
+      {/* {isLoading ? "결과 확인중 ..." : "결과 확인"}
+      {isLoading && <Lottie />} */}
 
+      {isLoading ?  '결과 확인중 ...' : disabled ? '처리 중...' : '결과 확인'}
+      
+    
         </Button>
       <hr />
         <Button

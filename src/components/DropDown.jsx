@@ -5,16 +5,13 @@ import { IoMdArrowDropdown, IoMdArrowDropup } from 'react-icons/io';
 const DropDown = (props) => {
   const { children, menuData, menuData2, menuType, icon,q } = props
   const [view, setView] = useState(false)
-
   const [defaultValue, setDefaultValue] = useState()
   const dropRef = useRef(null)
-
-
   const [isAmOrPm, setIsAmOrPm] = useState(undefined)
   const [selectedHour, setSelectedHour] = useState(undefined)
   const [selectedMinuite, setSelectedMinuite] = useState(undefined)
-
   const [isTimeClick, setIsTimeClick] = useState(false)
+  
   const handleDropDown = () => {
     if (menuType === "time") {
       setIsTimeClick(true)
@@ -22,12 +19,23 @@ const DropDown = (props) => {
     setView(!view)
   }
 
-  const handleDropItemClick = (target) => {
+  const handleDropItemClick = (target, idx) => {
     setIsTimeClick(true)
     setDefaultValue(target)
+    props.onClick(idx)
     setView(false)
   }
 
+
+ 
+
+  const handleDropListClick = (item, idx) => {
+    props.setQ(item.split(' ')[0])
+    props.setIdx(idx)
+  }
+
+ 
+  
   useEffect(() => {
     console.log('menuData2가 뭔데',menuData2)
     console.log('menuData가 뭔데',menuData)
@@ -40,14 +48,11 @@ const DropDown = (props) => {
         }
       }
     }
-
     const onCheckClickOutside = (e) => {
       if (view === true && dropRef.current && !dropRef.current.contains(e.target)) {
         setView(false);
       }
     };
-
-
     document.addEventListener('mousedown', onCheckClickOutside);
     return () => {
       document.removeEventListener('mousedown', onCheckClickOutside);
@@ -68,10 +73,6 @@ const DropDown = (props) => {
     setIsAmOrPm(item)
     setIsTimeClick(true)
   }
-
-
-
-
   return (
     <Layout>
       <SelectedBox onClick={handleDropDown}>
@@ -152,7 +153,7 @@ const DropDown = (props) => {
                       if (prevIdx === 1) {
                         if (idx + 1 <= 9) {
                           // return `0${idx+12}`
-                          return `0${idx+1}`
+                          return `${idx+13}`
                         } else {
                           return `${idx+13}`
                         }
@@ -217,16 +218,16 @@ const DropDown = (props) => {
 
           {menuType === "location" && menuData?.map((item, idx) => {
             return <DropItem onClick={() => {
-              handleDropItemClick(item)
-              props.onClick(idx)
+              handleDropItemClick(item, idx)
             }
             }>{item}</DropItem>
           })}
 
 
-            {menuData2 ? menuType === "set" && menuData2?.map((item) => {
+            {menuData2 ? menuType === "set" && menuData2?.map((item,idx) => {
             return <DropItem style={{color: item === q ? "red" : "black"}}
-            onClick={() => props.setQ(item)}>{item}</DropItem>
+            
+            onClick={() => handleDropListClick(item, idx)}>{item}</DropItem>
           }): null }
         
           {menuData?.length <= 0 && <div>로딩중..</div>}
