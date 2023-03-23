@@ -296,9 +296,9 @@ const Nav = (props) => {
 
         <InputBox>
           <InputButtonBox>
-            <InputButtonCheck 
+            {/* <InputButtonCheck 
             onClick={handleCheckBtnOnClick}
-            >∨</InputButtonCheck>
+            >∨</InputButtonCheck> */}
           </InputButtonBox>
           {isAlgorithm &&
             < Input
@@ -313,8 +313,8 @@ const Nav = (props) => {
         </InputBox>
         <InputBox>
           <InputButtonBox>
-            <InputButtonCheck 
-            onClick={handleCheckBtnOnClick}></InputButtonCheck>
+            {/* <InputButtonCheck 
+            onClick={handleCheckBtnOnClick}></InputButtonCheck> */}
           </InputButtonBox>
           {isAlgorithm && <Input
             type="number"
@@ -351,7 +351,12 @@ const Nav = (props) => {
          초기화
         </Button>
       </NavContent>
-      <Text>※ 알고리즘 선택 시, 현재 시각 기준 알고리즘 계산한 값을 조회합니다.</Text>
+      <Text1>
+        ※ 알고리즘 선택 시, 현재 시각 기준 알고리즘 계산한 값을 조회합니다.
+        <br />
+        ※ 기존데이터 조회 시, 시간값을 바꿀 경우 초기화를 하고 다시 진행하는 것을 권장합니다.
+      </Text1>
+  
     </Layout>
   );
 };
@@ -360,14 +365,14 @@ export default Nav;
 
 
 
-const Text = styled.div`
+const Text1 = styled.div`
   font-size: 10px;
   font-weight: 400;
   margin-top: 10px;
   margin-left: 390px;
   background-color: white;
-  width: 280px;
-  text-align: center;
+  width: 350px;
+  /* text-align: center; */
   padding: 2px;
 `
 
@@ -410,7 +415,7 @@ const InputBox = styled.div`
   position:relative;
   background-color:white;
   border-radius: 3px;
-  border:1px solid rgb(125,125,125,0.5);
+  /* border:1px solid rgb(125,125,125,0.5); */
   display:flex;
   justify-content:center;
   align-items:center;
@@ -459,14 +464,14 @@ align-items:center;
   }
 `
 
-const InputButtonMinus = styled(InputButtonPlus)`
-border-left:1px solid rgb(128,128,128,0.4);
-border-top:1px solid rgb(128,128,128,0.4);
-display:flex;
-&:hover{
-    cursor: pointer;
-  }
-`
+// const InputButtonMinus = styled(InputButtonPlus)`
+// border-left:1px solid rgb(128,128,128,0.4);
+// border-top:1px solid rgb(128,128,128,0.4);
+// display:flex;
+// &:hover{
+//     cursor: pointer;
+//   }
+// `
 
 const NavContent = styled.div`
     display:flex;
@@ -474,14 +479,14 @@ const NavContent = styled.div`
   /* background-color:rgb(255,255,255,0.5); */
 `
 
-const InputButtonCheck = styled.button`
-  height: 38px;
-  border: none;
-  color: rgb(113,113,113);
-  &:hover{
-    cursor: pointer;
-    background-color: rgb(222,222,222);
-    color: white;
-  }
-`
+// const InputButtonCheck = styled.button`
+//   height: 38px;
+//   border: none;
+//   color: rgb(113,113,113);
+//   &:hover{
+//     cursor: pointer;
+//     background-color: rgb(222,222,222);
+//     color: white;
+//   }
+// `
 

@@ -12,12 +12,6 @@ const DropDown = (props) => {
   const [selectedMinuite, setSelectedMinuite] = useState(undefined)
   const [isTimeClick, setIsTimeClick] = useState(false)
   
-  
-  //추가 수정한 코드
-  //am을 선택했을 때 시
-  const [selectedAmHour, setSelectedAmHour] = useState(undefined)
-  //pm을 선택했을 때 시
-  const [selectedPmHour, setSelectedPmHour] = useState(undefined)
 
 
   const handleDropDown = () => {
