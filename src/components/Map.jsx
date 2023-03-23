@@ -6,26 +6,13 @@ import MarkerBlue from './MarkerBlue';
 import MarkerOrange from './MarkerOrange';
 import MarkerRed from './MarkerRed';
 import AsideTable from './AsideBlueTable';
-// import Lottie from 'react-lottie';
-// import animationData from '../assets/animation.json';
 
-
-// const lottieOptions = {
-//   loop: true,
-//   autoplay: true,
-//   animationData: animationData,
-//   rendererSettings: {
-//     preserveAspectRatio: 'xMidYMid slice'
-//   }
-// };
 const Map = (props) => {
   const cordinates = { lat: 37.50736766932199, lng: -122.26005668254102 };
   const forster= {lat: 37.55946715838405,lng : -122.27002867456997}
   const [test,setTest] = useState(null)
   const [center, setCenter] = useState(forster);
   const [zoom, setZoom] = useState(12);
-  //로딩 애니메이션
-  // const [showLottie, setShowLottie] = useState(false);
 
    // 지역 타입 메뉴 데이터    
    const [geoMenuData, setGeoMenuData] = useState([])
@@ -50,10 +37,6 @@ useEffect(()=>{
   renderZoom(geoMenuData)
 },[test, props.setOrders])
 
-
-// useEffect(() => {
-//   setShowLottie(props.isLoading);
-// }, [props.isLoading]);
 
 
 const renderZoom = (findGeoList)=> {
@@ -84,7 +67,7 @@ console.log('redTruckLocations 2',redTruckLocations)
       test={test}
       setPerTruck={props.setPerTruck}
       />
-      {/* {showLottie && <Lottie />} */}
+  
       <GoogleMapReact
         bootstrapURLKeys={{
           // key: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
@@ -165,12 +148,11 @@ const Marker = ({  data, location, isSelected, handleMarkerClick, icon, selected
           textAlign: 'center', 
           fontWeight: 400, 
           fontSize: '13px',
-          zIndex : 9999999
         }}>
           {/* <div>트럭넘버:{location?.truck_num}</div> */}
-          <div>주문시간 : {location?.ordered_time}</div>
-          <div>배달 완료 시간 : {location?.pickup_time}</div>
-          <div>총 대기 시간 : {location?.waiting_time}분</div>
+          <div style={{zIndex : 9999999}}>주문시간 : {location?.ordered_time}</div>
+          <div style={{zIndex : 9999999}}>배달 완료 시간 : {location?.pickup_time}</div>
+          <div style={{zIndex : 9999999}}>총 대기 시간 : {location?.waiting_time}분</div>
         </div>
       )}
     </div>

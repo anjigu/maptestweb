@@ -331,6 +331,7 @@ const Cell = styled.div`
   border-left:1px solid rgb(128,128,128,0.2);
   border-bottom:1px solid rgb(128,128,128,0.2);
   padding: 5px;
+  font-size: 15px;
 `
 
 const Row = styled.div`

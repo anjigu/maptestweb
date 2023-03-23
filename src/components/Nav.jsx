@@ -332,15 +332,12 @@ const Nav = (props) => {
         disabled={isLoading}
         >
 
-      {/* 로딩 애니메이션 추가시*/}
-      {/* {isLoading ? "결과 확인중 ..." : "결과 확인"}
-      {isLoading && <Lottie />} */}
 
       {isLoading ?  '결과 확인중 ...' : disabled ? '처리 중...' : '결과 확인'}
       
     
         </Button>
-      <hr />
+        <hr />
         <Button
         width={100} 
         type="submit" 
