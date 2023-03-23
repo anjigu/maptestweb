@@ -152,7 +152,7 @@ const DropDown = (props) => {
             <TimeSelectorList>
               {/*시간 am과 pm 구분*/}
               {/*수정해야하는 부분 - start*/}
-              {new Array(12).fill(0).map((item, idx) => {
+              {/* {new Array(12).fill(0).map((item, idx) => {
                 return <TimeSelectorItem onClick={() => {
                   if (props.setStartTime) {
                     props?.setStartTime((prev) => prev.map((item, prevIdx) => {
@@ -184,9 +184,9 @@ const DropDown = (props) => {
                   }
                   handleHourOnClick(idx + 1)
                 }} baseTarget={selectedHour} target={idx + 1}>{idx + 1 < 10 ? `0${idx + 1}` : idx + 1}</TimeSelectorItem>
-              })}
+              })} */}
 
-{/* {new Array(12).fill(0).map((item, idx) => {
+{new Array(12).fill(0).map((item, idx) => {
   return (
     <TimeSelectorItem
       onClick={() => {
@@ -194,12 +194,16 @@ const DropDown = (props) => {
           props?.setStartTime((prev) =>
             prev.map((item, prevIdx) => {
               if (prevIdx === 1) {
-                if (idx === 0) {
+                if (isAmOrPm === "am" && idx+1 <= 9) {
+                  return `0${idx+1}`
+                } else if(isAmOrPm === "am" && idx+1 > 10){
                   return `${idx+1}`
-            
-                } else if (idx === 1) {
+                }
+                else if (isAmOrPm === "pm") {
                   return `${idx+13}`;
-                } 
+                } else {
+                  return item
+                }
               } 
             })
           );
@@ -207,12 +211,17 @@ const DropDown = (props) => {
           props?.setEndTime((prev) =>
             prev.map((item, prevIdx) => {
               if (prevIdx === 1) {
-                if (idx === 0) {
+                if (isAmOrPm === "am" && idx+1 <= 9) {
+                  return `0${idx+1}`
+                } else if(isAmOrPm === "am" && idx+1 > 10){
                   return `${idx+1}`
-                } else if (idx === 1) {
+                }
+                else if (isAmOrPm === "pm") {
                   return `${idx+13}`;
-                } 
-              } 
+                } else {
+                  return item
+                }
+              }
             })
           );
         }
@@ -224,7 +233,7 @@ const DropDown = (props) => {
       {idx + 1 < 10 ? `0${idx + 1}` : idx + 1}
     </TimeSelectorItem>
   );
-})} */}
+})}
 
 
                {/*수정해야하는 부분 - end*/}
@@ -235,11 +244,13 @@ const DropDown = (props) => {
                 return <TimeSelectorItem onClick={() => {
                   if (props.setStartTime) {
                     props?.setStartTime((prev) => prev.map((item, prevIdx) => {
-                      if (prevIdx === 2) {
-                        if (idx + 1 <= 9) {
-                          return `0${idx}`
+                      if(prevIdx === 2) {
+                        if(idx === 0) {
+                          return `00`
+                        } else if(idx + 1 <= 9){
+                          return `0${idx+1}`
                         } else {
-                          return `${idx}`
+                          return `${idx+1}`
                         }
                       } else {
                         return item
@@ -247,13 +258,15 @@ const DropDown = (props) => {
                     }))
                   } else {
                     props?.setEndTime((prev) => prev.map((item, prevIdx) => {
-                      if (prevIdx === 2) {
-                        if (idx + 1 <= 9) {
-                          return `0${idx}`
+                      if(prevIdx === 2) {
+                        if(idx === 0) {
+                          return `00`
+                        } else if(idx + 1 <= 9){
+                          return `0${idx+1}`
                         } else {
-                          return `${idx}`
+                          return `${idx+1}`
                         }
-                      } else {
+                      }  else {
                         return item
                       }
                     }))
