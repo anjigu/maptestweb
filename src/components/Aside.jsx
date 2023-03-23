@@ -61,7 +61,7 @@ const Aside = props => {
           <>
           <Table className='Total'>
             <TableHeader>
-              <Cell>Set Data.</Cell>
+              <Cell>Set Data</Cell>
               <Cell>{item?.set_num}</Cell>
             </TableHeader>
             {/*표2 데이터 값*/}
@@ -120,7 +120,7 @@ const Aside = props => {
               </Row>
               <Row>
                 <Cell>가장 짧은 배달 시간</Cell>
-                <Cell>{blueTruckData?.min_delivery_time}</Cell>
+                <Cell>{blueTruckData?.min_delivery_time}분</Cell>
               </Row>
           </TableBody>
           </Table>

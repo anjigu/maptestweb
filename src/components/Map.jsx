@@ -87,7 +87,8 @@ console.log('redTruckLocations 2',redTruckLocations)
       {/* {showLottie && <Lottie />} */}
       <GoogleMapReact
         bootstrapURLKeys={{
-          key: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
+          // key: process.env.REACT_APP_GOOGLE_MAP_API_KEY,
+          key: "AIzaSyB9_RyYZ1HLRQTql2vz8LiLC9SeH_ga6Do",
         }}
         defaultCenter={center}
         center={center}

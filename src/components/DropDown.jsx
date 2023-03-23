@@ -12,6 +12,14 @@ const DropDown = (props) => {
   const [selectedMinuite, setSelectedMinuite] = useState(undefined)
   const [isTimeClick, setIsTimeClick] = useState(false)
   
+  
+  //추가 수정한 코드
+  //am을 선택했을 때 시
+  const [selectedAmHour, setSelectedAmHour] = useState(undefined)
+  //pm을 선택했을 때 시
+  const [selectedPmHour, setSelectedPmHour] = useState(undefined)
+
+
   const handleDropDown = () => {
     if (menuType === "time") {
       setIsTimeClick(true)
@@ -37,10 +45,7 @@ const DropDown = (props) => {
  
   
   useEffect(() => {
-    console.log('menuData2가 뭔데',menuData2)
-    console.log('menuData가 뭔데',menuData)
     if (!view) {
-
       if (menuType === 'time') {
         if (!selectedHour && !selectedMinuite && !isAmOrPm) {
           setIsTimeClick(false)
@@ -121,7 +126,7 @@ const DropDown = (props) => {
 
                 if (props.setStartTime) {
                   props?.setStartTime((prev) => prev.map((item, idx) => {
-                    if (idx === 0) {
+                    if (idx === 1) {
                       return "pm"
                     } else {
                       return item
@@ -130,7 +135,7 @@ const DropDown = (props) => {
                 }
                 else {
                   props?.setEndTime((prev) => prev.map((item, idx) => {
-                    if (idx === 0) {
+                    if (idx === 1) {
                       return "pm"
                     } else {
                       return item
@@ -145,14 +150,14 @@ const DropDown = (props) => {
 
             </TimeSelectorList>
             <TimeSelectorList>
+              {/*시간 am과 pm 구분*/}
+              {/*수정해야하는 부분 - start*/}
               {new Array(12).fill(0).map((item, idx) => {
                 return <TimeSelectorItem onClick={() => {
-
                   if (props.setStartTime) {
                     props?.setStartTime((prev) => prev.map((item, prevIdx) => {
                       if (prevIdx === 1) {
                         if (idx + 1 <= 9) {
-                          // return `0${idx+12}`
                           return `${idx+13}`
                         } else {
                           return `${idx+13}`
@@ -160,13 +165,14 @@ const DropDown = (props) => {
                       } else {
                         return item
                       }
-                    }))
+                    }
+                    ))
                   }
                   else {
                     props?.setEndTime((prev) => prev.map((item, prevIdx) => {
                       if (prevIdx === 1) {
+                        console.log('prevIdx',prevIdx)
                         if (idx + 1 <= 9) {
-                          // return `0${idx+12}`
                           return `${idx+13}`
                         } else {
                           return `${idx+13}`
@@ -179,6 +185,49 @@ const DropDown = (props) => {
                   handleHourOnClick(idx + 1)
                 }} baseTarget={selectedHour} target={idx + 1}>{idx + 1 < 10 ? `0${idx + 1}` : idx + 1}</TimeSelectorItem>
               })}
+
+{/* {new Array(12).fill(0).map((item, idx) => {
+  return (
+    <TimeSelectorItem
+      onClick={() => {
+        if (props.setStartTime) {
+          props?.setStartTime((prev) =>
+            prev.map((item, prevIdx) => {
+              if (prevIdx === 1) {
+                if (idx === 0) {
+                  return `${idx+1}`
+            
+                } else if (idx === 1) {
+                  return `${idx+13}`;
+                } 
+              } 
+            })
+          );
+        } else {
+          props?.setEndTime((prev) =>
+            prev.map((item, prevIdx) => {
+              if (prevIdx === 1) {
+                if (idx === 0) {
+                  return `${idx+1}`
+                } else if (idx === 1) {
+                  return `${idx+13}`;
+                } 
+              } 
+            })
+          );
+        }
+        handleHourOnClick(idx + 1);
+      }}
+      baseTarget={selectedHour}
+      target={idx + 1}
+    >
+      {idx + 1 < 10 ? `0${idx + 1}` : idx + 1}
+    </TimeSelectorItem>
+  );
+})} */}
+
+
+               {/*수정해야하는 부분 - end*/}
             </TimeSelectorList>
             <TimeSelectorList>
               
